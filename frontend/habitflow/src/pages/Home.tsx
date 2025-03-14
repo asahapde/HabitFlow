@@ -3,7 +3,6 @@ import { FC, useEffect, useState } from "react";
 
 const Home: FC = () => {
   const [data, setData] = useState<string>("Loading...");
-  console.log("API URL:", process.env.REACT_APP_API_URL);
 
   useEffect(() => {
     axios
