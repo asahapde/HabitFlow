@@ -16,7 +16,6 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "dev": "ts-node src/server.ts",
-    "watch": "nodemon src/server.ts",
-    "prepare": "npm install && npm run build"
+    "watch": "nodemon src/server.ts"
   }
 }
