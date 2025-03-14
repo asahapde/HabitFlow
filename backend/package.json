@@ -13,8 +13,10 @@
     "typescript": "^5.8.2"
   },
   "scripts": {
-    "start": "npm run build && node dist/server.js",
-    "dev": "nodemon src/server.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node src/server.ts",
+    "watch": "nodemon src/server.ts",
+    "prepare": "npm install && npm run build"
   }
 }
