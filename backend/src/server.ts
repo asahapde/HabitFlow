@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 // Enable CORS
 app.use(
   cors({
-    origin: ["http://localhost:3000"], // Allow both local & deployed frontend
+    origin: ["http://localhost:3000", "https://habitflow-bnai.onrender.com"], // Allow both local & deployed frontend
     credentials: true,
   })
 );
