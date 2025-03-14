@@ -1,5 +1,6 @@
 import { FC, lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navbar from "../components/Navbar/Navbar";
 
 // Lazy load pages
 const Home = lazy(() => import("../pages/Home"));
@@ -20,6 +21,7 @@ const AppRouter: FC = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+      <Navbar />
     </BrowserRouter>
   );
 };
