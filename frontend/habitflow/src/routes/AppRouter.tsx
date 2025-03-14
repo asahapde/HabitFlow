@@ -11,7 +11,7 @@ const NotFound = lazy(() => import("../pages/NotFound"));
 const AppRouter: FC = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <BrowserRouter>
+      <BrowserRouter basename="/">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/habits" element={<Habits />} />
