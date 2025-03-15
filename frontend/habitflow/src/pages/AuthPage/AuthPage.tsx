@@ -6,6 +6,7 @@ import "./AuthPage.scss";
 
 const AuthPage: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -49,7 +50,7 @@ const AuthPage: React.FC = () => {
     setError(null);
     try {
       if (isSignUp) {
-        await signUp(email, password);
+        await signUp(email, password, name);
       } else {
         await signIn(email, password);
       }
@@ -87,6 +88,15 @@ const AuthPage: React.FC = () => {
         {error && <p className="error">{error}</p>}
 
         <form onSubmit={handleSubmit}>
+          {isSignUp && (
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          )}
           <input
             type="email"
             placeholder="Email Address"

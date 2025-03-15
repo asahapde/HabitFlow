@@ -1,7 +1,9 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 const Home: FC = () => {
+  const { user } = useAuth();
   const [data, setData] = useState<string>("Loading...");
 
   useEffect(() => {
@@ -19,6 +21,7 @@ const Home: FC = () => {
   return (
     <div>
       <h1>Home</h1>
+      <h2>Welcome, {user?.displayName || "User"}!</h2>
       <p>Data from backend: {data}</p>
     </div>
   );
