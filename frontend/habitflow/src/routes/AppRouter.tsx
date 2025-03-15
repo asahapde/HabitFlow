@@ -9,7 +9,7 @@ import AuthPage from "../pages/AuthPage/AuthPage";
 const Home = lazy(() => import("../pages/Home"));
 const Habits = lazy(() => import("../pages/Habits"));
 const Insights = lazy(() => import("../pages/Insights"));
-const Profile = lazy(() => import("../pages/Profile"));
+const Profile = lazy(() => import("../pages/Profile/Profile"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 const AppRouter: FC = () => {
