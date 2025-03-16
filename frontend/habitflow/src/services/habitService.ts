@@ -10,10 +10,20 @@ import { db } from "./firebaseConfig";
 const habitsCollection = collection(db, "habits");
 
 // ✅ Add a habit
-export const addHabit = async (userId: string, habit: string) => {
+export const addHabit = async (
+  userId: string,
+  email: string,
+  habit: string
+) => {
   try {
-    const newHabit = await addDoc(habitsCollection, { userId, habit }); // Ensure 'habit' is saved
-    return { id: newHabit.id, habit }; // Return habit with ID
+    if (!userId || !email) throw new Error("User is not authenticated");
+
+    const newHabitRef = await addDoc(habitsCollection, {
+      userId,
+      email,
+      habit,
+    });
+    return { id: newHabitRef.id, email, habit }; // ✅ Return the new habit with email
   } catch (error) {
     console.error("Error adding habit:", error);
     throw error;

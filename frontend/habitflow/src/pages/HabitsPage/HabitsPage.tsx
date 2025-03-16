@@ -29,7 +29,7 @@ const HabitsPage: React.FC = () => {
   const handleAddHabit = async () => {
     if (!user || habitInput.trim() === "") return;
 
-    const newHabit = await addHabit(user.uid, habitInput);
+    const newHabit = await addHabit(user.uid, user.email!, habitInput);
     setHabits([...habits, newHabit]);
     setHabitInput("");
   };
