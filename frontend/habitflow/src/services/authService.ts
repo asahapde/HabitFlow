@@ -8,6 +8,9 @@ import {
 } from "firebase/auth";
 import { auth } from "./firebaseConfig";
 
+// ✅ Function to Check if User is on Mobile
+const isMobile = () => /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 // ✅ Sign Up Function (Includes Name)
 export const signUp = async (email: string, password: string, name: string) => {
   try {
@@ -29,15 +32,27 @@ export const signUp = async (email: string, password: string, name: string) => {
 };
 
 // ✅ Google Sign-In
-export const signInWithGoogle = async () => {
-  try {
-    const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(auth, provider);
-    return result.user; // ✅ Returns the authenticated Google user
-  } catch (error) {
-    console.error("Google Sign-In Error:", error);
-    throw error;
-  }
+export const signInWithGoogle = () => {
+  const provider = new GoogleAuthProvider();
+
+  return new Promise((resolve, reject) => {
+    // ✅ Ensure popup is triggered inside an event handler
+    document.addEventListener(
+      "click",
+      async () => {
+        try {
+          console.log("Opening Google Sign-In Popup...");
+          const result = await signInWithPopup(auth, provider);
+          console.log("Google Sign-In Success:", result.user);
+          resolve(result.user);
+        } catch (error) {
+          console.error("Google Sign-In Error:", error);
+          reject(error);
+        }
+      },
+      { once: true }
+    ); // ✅ Ensures event runs only once
+  });
 };
 
 // Sign In Function
