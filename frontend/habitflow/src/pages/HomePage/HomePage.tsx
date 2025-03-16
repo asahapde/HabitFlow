@@ -8,10 +8,6 @@ const HomePage: React.FC = () => {
   return (
     <div className="home-container">
       <h2>Welcome, {user?.displayName || "Guest"}!</h2>
-
-      {user?.photoURL && ( // ✅ Show profile picture only if available
-        <img src={user.photoURL} alt="Profile" className="profile-picture" />
-      )}
     </div>
   );
 };

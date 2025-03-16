@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { signIn, signInWithGoogle, signUp } from "../../services/authService"; // Import auth functions
+import { signIn, signUp } from "../../services/authService"; // Import auth functions
 import "./AuthPage.scss";
 
 const AuthPage: React.FC = () => {
@@ -65,14 +65,6 @@ const AuthPage: React.FC = () => {
     setError(null);
   };
 
-  const handleGoogleSignIn = async () => {
-    signInWithGoogle()
-      .then(() => navigate("/")) // Redirect to home page after successful login
-      .catch((err) =>
-        setError(getErrorMessage(err.code || "auth/internal-error"))
-      );
-  };
-
   const title = isSignUp ? "Create an Account" : "Welcome Back";
 
   const message = isSignUp
@@ -126,10 +118,6 @@ const AuthPage: React.FC = () => {
         <p className="toggle-text">
           {toggleText} <span onClick={handleToggle}>{toggleButtonText}</span>
         </p>
-
-        <button className="google-signin" onClick={handleGoogleSignIn}>
-          Sign in with Google
-        </button>
       </div>
     </div>
   );
