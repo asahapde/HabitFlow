@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { signIn, signUp } from "../../services/authService"; // Import auth functions
+import { signIn, signInWithGoogle, signUp } from "../../services/authService"; // Import auth functions
 import "./AuthPage.scss";
 
 const AuthPage: React.FC = () => {
@@ -65,6 +65,15 @@ const AuthPage: React.FC = () => {
     setError(null);
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      navigate("/"); // ✅ Redirect to home after sign-in
+    } catch (error) {
+      console.error("Google Sign-In Error:", error);
+    }
+  };
+
   const title = isSignUp ? "Create an Account" : "Welcome Back";
 
   const message = isSignUp
@@ -118,6 +127,10 @@ const AuthPage: React.FC = () => {
         <p className="toggle-text">
           {toggleText} <span onClick={handleToggle}>{toggleButtonText}</span>
         </p>
+
+        <button className="google-signin" onClick={handleGoogleSignIn}>
+          Sign in with Google
+        </button>
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -22,6 +24,18 @@ export const signUp = async (email: string, password: string, name: string) => {
     return user;
   } catch (error: any) {
     console.error("Sign Up Error:", error.message);
+    throw error;
+  }
+};
+
+// ✅ Google Sign-In
+export const signInWithGoogle = async () => {
+  try {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    return result.user; // ✅ Returns the authenticated Google user
+  } catch (error) {
+    console.error("Google Sign-In Error:", error);
     throw error;
   }
 };
