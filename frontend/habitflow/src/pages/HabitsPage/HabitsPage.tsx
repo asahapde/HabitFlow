@@ -18,7 +18,14 @@ const HabitsPage: React.FC = () => {
 
   const handleCreateHabit = async () => {
     try {
-      await addHabit(user?.uid!, habitName, selectedIcon, repeatDays, quantity);
+      await addHabit(
+        user?.uid!,
+        user?.displayName,
+        habitName,
+        selectedIcon,
+        repeatDays,
+        quantity
+      );
       alert("Habit created successfully!");
       navigate("/"); // ✅ Redirect to Homepage after adding
     } catch (error) {

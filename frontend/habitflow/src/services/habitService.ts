@@ -18,6 +18,7 @@ const daysOrder = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
  */
 export const addHabit = async (
   userId: string,
+  userName: string,
   habitName: string,
   selectedIcon: string,
   repeatDays: string[],
@@ -34,6 +35,7 @@ export const addHabit = async (
 
   const newHabit = {
     userId,
+    userName,
     name: habitName,
     icon: selectedIcon,
     repeatDays: sortedRepeatDays,
