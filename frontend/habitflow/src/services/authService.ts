@@ -3,7 +3,6 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   setPersistence,
-  signInWithCredential,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -38,43 +37,15 @@ export const signUp = async (email: string, password: string, name: string) => {
  * 🔥 Sign in with Google - Uses Popup, Falls Back to Redirect
  */
 export const signInWithGoogle = async () => {
-  try {
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({ prompt: "select_account" });
-
-    console.log("🔥 Setting Firebase authentication persistence...");
-    await setPersistence(auth, browserLocalPersistence); // ✅ Ensures authentication persists after refresh
-
-    console.log(`📱 Device Type: ${isMobile() ? "Mobile" : "Desktop"}`);
-
-    console.log("✅ Attempting Google Sign-In with Popup...");
-    try {
+  const provider = new GoogleAuthProvider();
+  setPersistence(auth, browserLocalPersistence)
+    .then(async () => {
       const result = await signInWithPopup(auth, provider);
-      console.log("✅ Google Sign-In Success:", result.user);
       return result.user;
-    } catch (error: any) {
-      console.warn("🚨 Popup blocked!");
-
-      // ✅ On mobile, use credential-based sign-in
-      if (isMobile()) {
-        console.log("📱 Using credential-based sign-in on mobile...");
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        if (credential) {
-          const result = await signInWithCredential(auth, credential);
-          console.log(
-            "✅ Google Sign-In with Credential Success:",
-            result.user
-          );
-          return result.user;
-        }
-      }
-
-      throw error;
-    }
-  } catch (error) {
-    console.error("❌ Google Sign-In Error:", error);
-    throw error;
-  }
+    })
+    .catch((error) => {
+      console.error("Error setting persistence:", error);
+    });
 };
 
 // Sign In Function

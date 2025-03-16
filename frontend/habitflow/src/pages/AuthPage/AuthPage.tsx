@@ -66,12 +66,11 @@ const AuthPage: React.FC = () => {
   };
 
   const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-      navigate("/"); // ✅ Redirect to home after sign-in
-    } catch (error) {
-      console.error("Google Sign-In Error:", error);
-    }
+    signInWithGoogle()
+      .then(() => navigate("/")) // Redirect to home page after successful login
+      .catch((err) =>
+        setError(getErrorMessage(err.code || "auth/internal-error"))
+      );
   };
 
   const title = isSignUp ? "Create an Account" : "Welcome Back";
