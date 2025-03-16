@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-const Insights: FC = () => {
+const InsightsPage: FC = () => {
   return (
     <div>
       <h1>Insights</h1>
@@ -8,4 +8,4 @@ const Insights: FC = () => {
   );
 };
 
-export default Insights;
+export default InsightsPage;

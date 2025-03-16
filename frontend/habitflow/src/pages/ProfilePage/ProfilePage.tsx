@@ -1,9 +1,9 @@
 import React from "react";
-import { logout } from "../../authService"; // Import logout function
 import { useAuth } from "../../context/AuthContext"; // Import auth context
-import "./Profile.scss";
+import { logout } from "../../services/authService"; // Import logout function
+import "./ProfilePage.scss";
 
-const Profile: React.FC = () => {
+const ProfilePage: React.FC = () => {
   const { user } = useAuth();
 
   return (
@@ -18,4 +18,4 @@ const Profile: React.FC = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;

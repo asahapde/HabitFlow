@@ -6,11 +6,11 @@ import { AuthProvider } from "../context/AuthContext";
 import AuthPage from "../pages/AuthPage/AuthPage";
 
 // Lazy load pages
-const Home = lazy(() => import("../pages/Home"));
-const Habits = lazy(() => import("../pages/Habits"));
-const Insights = lazy(() => import("../pages/Insights"));
-const Profile = lazy(() => import("../pages/Profile/Profile"));
-const NotFound = lazy(() => import("../pages/NotFound"));
+const Home = lazy(() => import("../pages/HomePage/HomePage"));
+const Habits = lazy(() => import("../pages/HabitsPage/HabitsPage"));
+const Insights = lazy(() => import("../pages/InsightsPage/InsightsPage"));
+const Profile = lazy(() => import("../pages/ProfilePage/ProfilePage"));
+const NotFound = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
 
 const AppRouter: FC = () => {
   return (

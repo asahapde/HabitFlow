@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signIn, signUp } from "../../authService"; // Import auth functions
 import { useAuth } from "../../context/AuthContext";
+import { signIn, signUp } from "../../services/authService"; // Import auth functions
 import "./AuthPage.scss";
 
 const AuthPage: React.FC = () => {
@@ -110,6 +110,7 @@ const AuthPage: React.FC = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="on"
           />
           <button type="submit">{buttonText}</button>
         </form>
