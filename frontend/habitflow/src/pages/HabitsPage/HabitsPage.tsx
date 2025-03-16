@@ -1,70 +1,76 @@
-import { Trash2 } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { addHabit, deleteHabit, getHabits } from "../../services/habitService";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext"; // To get user info
+import { addHabit } from "../../services/habitService";
 import "./HabitsPage.scss";
 
-interface Habit {
-  id: string;
-  habit: string;
-}
+const habitIcons = ["🏋️", "📚", "🧘", "🚰", "🥗", "💤"];
 
 const HabitsPage: React.FC = () => {
   const { user } = useAuth();
-  const [habits, setHabits] = useState<Habit[]>([]);
-  const [habitInput, setHabitInput] = useState("");
+  const navigate = useNavigate();
+  const [habitName, setHabitName] = useState("");
+  const [selectedIcon, setSelectedIcon] = useState(habitIcons[0]);
+  const [repeatDays, setRepeatDays] = useState<string[]>([]);
+  const [quantity, setQuantity] = useState<number>(1);
 
-  useEffect(() => {
-    if (user) {
-      fetchHabits();
+  const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+  const handleCreateHabit = async () => {
+    try {
+      await addHabit(user?.uid!, habitName, selectedIcon, repeatDays, quantity);
+      alert("Habit created successfully!");
+      navigate("/"); // ✅ Redirect to Homepage after adding
+    } catch (error) {
+      alert("Failed to create habit.");
     }
-  }, [user]);
-
-  const fetchHabits = async () => {
-    if (!user) return;
-    const userHabits = await getHabits(user.uid);
-    setHabits(userHabits);
-  };
-
-  const handleAddHabit = async () => {
-    if (!user || habitInput.trim() === "") return;
-
-    const newHabit = await addHabit(user.uid, user.email!, habitInput);
-    setHabits([...habits, newHabit]);
-    setHabitInput("");
-  };
-
-  const handleDeleteHabit = async (habitId: string) => {
-    await deleteHabit(habitId);
-    setHabits(habits.filter((habit) => habit.id !== habitId));
   };
 
   return (
     <div className="habits-container">
-      <h2>Your Habits</h2>
-      <div className="habit-form">
-        <input
-          type="text"
-          placeholder="Enter a habit..."
-          value={habitInput}
-          onChange={(e) => setHabitInput(e.target.value)}
-        />
-        <button onClick={handleAddHabit}>Add Habit</button>
+      <h2>Create a New Habit</h2>
+
+      <input
+        type="text"
+        placeholder="Habit Name"
+        value={habitName}
+        onChange={(e) => setHabitName(e.target.value)}
+      />
+
+      <div className="icon-selector">
+        {habitIcons.map((icon) => (
+          <span
+            key={icon}
+            className={`icon ${selectedIcon === icon ? "selected" : ""}`}
+            onClick={() => setSelectedIcon(icon)}
+          >
+            {icon}
+          </span>
+        ))}
       </div>
 
-      <ul className="habit-list">
-        {habits.map((habit) => (
-          <li key={habit.id}>
-            <span>{habit.habit}</span>
-            <button
-              className="delete-button"
-              onClick={() => handleDeleteHabit(habit.id)}
-            >
-              <Trash2 className="trash-icon" />
-            </button>
-          </li>
+      <div className="days-selector">
+        {daysOfWeek.map((day) => (
+          <button
+            key={day}
+            className={`day ${repeatDays.includes(day) ? "selected" : ""}`}
+            onClick={() => setRepeatDays([...repeatDays, day])}
+          >
+            {day}
+          </button>
         ))}
-      </ul>
+      </div>
+
+      {/* <input
+        type="number"
+        min="1"
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      /> */}
+
+      <button className="save-btn" onClick={handleCreateHabit}>
+        Save Habit
+      </button>
     </div>
   );
 };

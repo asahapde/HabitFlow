@@ -12,7 +12,6 @@ code {
     monospace;
 }
 
-.content {
-  padding-bottom: 90px;
-  /* Adjust based on navbar height */
+* {
+  box-sizing: border-box;
 }
