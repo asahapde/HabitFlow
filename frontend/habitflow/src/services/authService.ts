@@ -1,12 +1,11 @@
 import {
   browserLocalPersistence,
   createUserWithEmailAndPassword,
-  getRedirectResult,
   GoogleAuthProvider,
   setPersistence,
+  signInWithCredential,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signInWithRedirect,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -46,37 +45,35 @@ export const signInWithGoogle = async () => {
     console.log("🔥 Setting Firebase authentication persistence...");
     await setPersistence(auth, browserLocalPersistence); // ✅ Ensures authentication persists after refresh
 
+    console.log(`📱 Device Type: ${isMobile() ? "Mobile" : "Desktop"}`);
+
     console.log("✅ Attempting Google Sign-In with Popup...");
     try {
       const result = await signInWithPopup(auth, provider);
       console.log("✅ Google Sign-In Success:", result.user);
       return result.user;
-    } catch (error) {
-      console.warn("🚨 Popup blocked, falling back to Redirect...");
-      await signInWithRedirect(auth, provider);
+    } catch (error: any) {
+      console.warn("🚨 Popup blocked!");
+
+      // ✅ On mobile, use credential-based sign-in
+      if (isMobile()) {
+        console.log("📱 Using credential-based sign-in on mobile...");
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        if (credential) {
+          const result = await signInWithCredential(auth, credential);
+          console.log(
+            "✅ Google Sign-In with Credential Success:",
+            result.user
+          );
+          return result.user;
+        }
+      }
+
+      throw error;
     }
   } catch (error) {
     console.error("❌ Google Sign-In Error:", error);
     throw error;
-  }
-};
-
-/**
- * 🔄 Handle Redirect Sign-In After User Returns
- */
-export const handleGoogleRedirect = async () => {
-  try {
-    console.log("🔥 Checking for Google Redirect Result...");
-
-    const result = await getRedirectResult(auth);
-    if (result && result.user) {
-      console.log("✅ Google Redirect Success:", result.user);
-      return result.user;
-    } else {
-      console.log("🚨 No redirect result found (null)");
-    }
-  } catch (error) {
-    console.error("❌ Google Redirect Error:", error);
   }
 };
 
