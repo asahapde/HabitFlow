@@ -1,8 +1,12 @@
 import {
+  browserLocalPersistence,
   createUserWithEmailAndPassword,
+  getRedirectResult,
   GoogleAuthProvider,
+  setPersistence,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signInWithRedirect,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -31,28 +35,49 @@ export const signUp = async (email: string, password: string, name: string) => {
   }
 };
 
-// ✅ Google Sign-In
-export const signInWithGoogle = () => {
-  const provider = new GoogleAuthProvider();
+/**
+ * 🔥 Sign in with Google - Uses Popup, Falls Back to Redirect
+ */
+export const signInWithGoogle = async () => {
+  try {
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
 
-  return new Promise((resolve, reject) => {
-    // ✅ Ensure popup is triggered inside an event handler
-    document.addEventListener(
-      "click",
-      async () => {
-        try {
-          console.log("Opening Google Sign-In Popup...");
-          const result = await signInWithPopup(auth, provider);
-          console.log("Google Sign-In Success:", result.user);
-          resolve(result.user);
-        } catch (error) {
-          console.error("Google Sign-In Error:", error);
-          reject(error);
-        }
-      },
-      { once: true }
-    ); // ✅ Ensures event runs only once
-  });
+    console.log("🔥 Setting Firebase authentication persistence...");
+    await setPersistence(auth, browserLocalPersistence); // ✅ Ensures authentication persists after refresh
+
+    console.log("✅ Attempting Google Sign-In with Popup...");
+    try {
+      const result = await signInWithPopup(auth, provider);
+      console.log("✅ Google Sign-In Success:", result.user);
+      return result.user;
+    } catch (error) {
+      console.warn("🚨 Popup blocked, falling back to Redirect...");
+      await signInWithRedirect(auth, provider);
+    }
+  } catch (error) {
+    console.error("❌ Google Sign-In Error:", error);
+    throw error;
+  }
+};
+
+/**
+ * 🔄 Handle Redirect Sign-In After User Returns
+ */
+export const handleGoogleRedirect = async () => {
+  try {
+    console.log("🔥 Checking for Google Redirect Result...");
+
+    const result = await getRedirectResult(auth);
+    if (result && result.user) {
+      console.log("✅ Google Redirect Success:", result.user);
+      return result.user;
+    } else {
+      console.log("🚨 No redirect result found (null)");
+    }
+  } catch (error) {
+    console.error("❌ Google Redirect Error:", error);
+  }
 };
 
 // Sign In Function

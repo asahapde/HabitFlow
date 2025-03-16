@@ -1,4 +1,4 @@
-import { onAuthStateChanged, User } from "firebase/auth";
+import { getRedirectResult, onAuthStateChanged, User } from "firebase/auth";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../services/firebaseConfig";
 
@@ -19,8 +19,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [loading, setLoading] = useState(true); // ✅ Added loading state
 
   useEffect(() => {
+    console.log("🔥 Checking Firebase Authentication State...");
+
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      setUser(firebaseUser);
+      if (!firebaseUser) {
+        console.log("🟡 No user detected, checking redirect result...");
+
+        const result = await getRedirectResult(auth);
+        if (result && result.user) {
+          console.log("✅ Google Redirect Login Success:", result.user);
+          setUser(result.user);
+        }
+      } else {
+        console.log("✅ User is already authenticated:", firebaseUser);
+        setUser(firebaseUser);
+      }
       setLoading(false);
     });
 

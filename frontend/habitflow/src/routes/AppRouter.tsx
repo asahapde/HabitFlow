@@ -14,8 +14,8 @@ const NotFound = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
 
 const AppRouter: FC = () => {
   return (
-    <AuthProvider>
-      <BrowserRouter basename="/">
+    <BrowserRouter basename="/">
+      <AuthProvider>
         <div className="content">
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
@@ -36,8 +36,8 @@ const AppRouter: FC = () => {
           </Suspense>
         </div>
         <Navbar />
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 };
 
