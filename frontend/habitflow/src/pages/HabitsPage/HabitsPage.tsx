@@ -20,7 +20,7 @@ const HabitsPage: React.FC = () => {
     try {
       await addHabit(
         user?.uid!,
-        user?.displayName,
+        user?.displayName!,
         habitName,
         selectedIcon,
         repeatDays,
