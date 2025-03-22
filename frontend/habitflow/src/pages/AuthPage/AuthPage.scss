@@ -11,6 +11,7 @@ $google-red: #db4437;
   align-items: center;
   height: 100vh;
   background: $background-color;
+  padding: 20px;
 }
 
 .loading-screen {
@@ -18,10 +19,10 @@ $google-red: #db4437;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-size: 18px;
-  font-weight: bold;
-  color: #6c63ff;
   background-color: #f4f4f9;
+  color: #6c63ff;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .google-signin {
@@ -86,12 +87,21 @@ $google-red: #db4437;
   h2 {
     color: $text-color;
     margin-bottom: 10px;
+    font-size: 24px;
+
+    @media (min-width: 768px) {
+      font-size: 28px;
+    }
   }
 
   p {
     color: #666;
     font-size: 14px;
     margin-bottom: 20px;
+
+    @media (min-width: 768px) {
+      font-size: 16px;
+    }
   }
 
   form {
@@ -109,8 +119,13 @@ $google-red: #db4437;
       box-sizing: border-box;
 
       &:focus {
-        border-color: #6c63ff;
+        border-color: $primary-color;
         outline: none;
+      }
+
+      @media (min-width: 768px) {
+        font-size: 16px;
+        padding: 12px;
       }
     }
 
@@ -127,6 +142,12 @@ $google-red: #db4437;
 
       &:hover {
         background: darken($primary-color, 10%);
+      }
+
+      @media (min-width: 768px) {
+        font-size: 16px;
+        padding: 12px;
+        width: 160px;
       }
     }
   }
@@ -146,5 +167,19 @@ $google-red: #db4437;
         color: darken($primary-color, 5%);
       }
     }
+
+    @media (min-width: 768px) {
+      font-size: 15px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    max-width: 450px;
+    padding: 40px;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 500px;
+    padding: 48px;
   }
 }

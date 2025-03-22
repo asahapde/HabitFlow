@@ -1,7 +1,7 @@
 import { FC, lazy, Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
-import ProtectedRoute from "../components/ProtectedRoute";
+import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import { AuthProvider } from "../context/AuthContext";
 import AuthPage from "../pages/AuthPage/AuthPage";
 
@@ -17,13 +17,23 @@ const AppRouter: FC = () => {
   return (
     <BrowserRouter basename="/">
       <AuthProvider>
-        <div className="content">
-          <Suspense fallback={<div>Loading...</div>}>
-            <Routes>
-              {/* Public Route */}
-              <Route path="/auth" element={<AuthPage />} />
+        <Suspense
+          fallback={<div className="suspense-fallback">Loading...</div>}
+        >
+          <Routes>
+            {/* Public Route */}
+            <Route path="/auth" element={<AuthPage />} />
 
-              {/* Protected Routes */}
+            <Route
+              element={
+                <>
+                  <div className="content">
+                    <Outlet />
+                  </div>
+                  <Navbar />
+                </>
+              }
+            >
               <Route element={<ProtectedRoute />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/habits" element={<Habits />} />
@@ -31,13 +41,12 @@ const AppRouter: FC = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/edit-habit/:id" element={<EditHabit />} />
               </Route>
+            </Route>
 
-              {/* 404 Page */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </div>
-        <Navbar />
+            {/* 404 Route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </AuthProvider>
     </BrowserRouter>
   );

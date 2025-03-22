@@ -26,3 +26,13 @@ code {
     padding-bottom: 0;
   }
 }
+
+.suspense-fallback {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  font-size: 18px;
+  font-weight: 500;
+  color: #666;
+}

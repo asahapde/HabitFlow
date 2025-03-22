@@ -1,9 +1,17 @@
-import { FC } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./NotFoundPage.scss";
 
-const NotFoundPage: FC = () => {
+const NotFoundPage: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
-    <div>
-      <h1>Not Found</h1>
+    <div className="notfound-container">
+      <div className="notfound-content">
+        <h1>404</h1>
+        <p>Oops! The page you're looking for doesn't exist.</p>
+        <button onClick={() => navigate("/")}>Go Home</button>
+      </div>
     </div>
   );
 };
