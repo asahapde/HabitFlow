@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="public/logo192.png" alt="HabitFlow Logo" width="100" />
+  <img src="/frontend/habitflow/public/logo192.png" alt="HabitFlow Logo" width="100" />
 </p>
 
 ---
