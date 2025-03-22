@@ -1,0 +1,51 @@
+.streak-summary {
+  display: flex;
+  flex-direction: column;
+
+  .streak-boxes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    gap: 10px;
+
+    .streak {
+      flex: 1;
+      background: #fff3cd;
+      padding: 16px;
+      border-radius: 10px;
+      text-align: center;
+      transition: 0.3s;
+
+      &:hover {
+        background: #ffe8a1;
+        transform: scale(1.02);
+      }
+
+      &.current {
+        background: #d4edda;
+
+        &:hover {
+          background: #bdf2c7;
+        }
+      }
+
+      &.longest {
+        background: #cce5ff;
+
+        &:hover {
+          background: #aad4ff;
+        }
+      }
+
+      h2 {
+        font-size: 28px;
+        margin-top: 5px;
+      }
+
+      p {
+        font-size: 14px;
+        color: #555;
+      }
+    }
+  }
+}

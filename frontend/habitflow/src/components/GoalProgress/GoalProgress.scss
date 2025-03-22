@@ -1,0 +1,33 @@
+.goal-progress {
+  h3 {
+    margin-bottom: 12px;
+  }
+
+  .goal-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 15px;
+
+      .label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      .progress-bar {
+        background: #e0e0e0;
+        height: 10px;
+        border-radius: 6px;
+        overflow: hidden;
+
+        .fill {
+          background: #6c63ff;
+          height: 100%;
+          transition: width 0.4s ease-in-out;
+        }
+      }
+    }
+  }
+}

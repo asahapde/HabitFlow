@@ -9,6 +9,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
+import { Habit } from "../types/Habit";
 import { db } from "./firebaseConfig";
 
 const daysOrder = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -70,17 +71,20 @@ export const deleteHabit = async (habitId: string) => {
 /**
  * ✅ Fetch All User Habits (Includes Completion Data)
  */
-export const getUserHabits = async (userId: string) => {
+export const getUserHabits = async (userId: string): Promise<Habit[]> => {
   const habitsQuery = query(
     collection(db, "habits"),
     where("userId", "==", userId)
   );
   const snapshot = await getDocs(habitsQuery);
 
-  return snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+  return snapshot.docs.map((doc) => {
+    const data = doc.data() as Omit<Habit, "id">; // ✅ Tell TS the rest matches Habit minus ID
+    return {
+      id: doc.id,
+      ...data,
+    };
+  });
 };
 
 /**

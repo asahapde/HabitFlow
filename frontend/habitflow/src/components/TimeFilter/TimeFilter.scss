@@ -1,0 +1,27 @@
+.time-filter {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16px;
+  gap: 10px;
+
+  button {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    background: #f7f7f7;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+
+    &.active {
+      background: #6c63ff;
+      color: white;
+      border-color: #6c63ff;
+      font-weight: bold;
+    }
+
+    &:hover {
+      background: #e6e6fa;
+    }
+  }
+}

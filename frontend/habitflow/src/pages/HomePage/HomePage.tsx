@@ -6,12 +6,13 @@ import {
   getUserHabits,
   toggleHabitCompletion, // ✅ New function to toggle completion
 } from "../../services/habitService";
+import { Habit } from "../../types/Habit";
 import "./HomePage.scss";
 
 const HomePage: React.FC = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [habits, setHabits] = useState<any[]>([]);
+  const [habits, setHabits] = useState<Habit[]>([]);
   const [today, setToday] = useState("");
 
   useEffect(() => {
