@@ -1,19 +1,37 @@
 .insights-container {
-  padding: 20px;
   background: #f4f4f9;
   min-height: 100vh;
-  color: #333;
+  padding: 20px;
 
-  h2 {
-    margin-bottom: 20px;
-    font-size: 28px;
-  }
+  .insights-content {
+    color: #333;
 
-  .section {
-    margin-bottom: 25px;
-    background: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+
+      @media (min-width: 768px) {
+        text-align: center;
+        font-size: 32px;
+      }
+    }
+
+    .section {
+      margin-bottom: 25px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+
+      @media (min-width: 768px) {
+        padding: 25px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0;
+    }
   }
 }

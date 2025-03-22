@@ -16,16 +16,18 @@ const InsightsPage: FC = () => {
   return (
     <TimeFilterProvider>
       <div className="insights-container">
-        <h2>Insights</h2>
-        {/* <TimeFilter /> */}
-        <MotivationMessage />
-        <StreakSummary />
-        <CompletionGraph />
-        <HabitBreakdown />
-        <GoalProgress />
-        <TopHabits />
-        <MissedHabits />
-        <Achievements />
+        <div className="insights-content">
+          <h2>Insights</h2>
+          {/* <TimeFilter /> */}
+          <MotivationMessage />
+          <StreakSummary />
+          <CompletionGraph />
+          <HabitBreakdown />
+          <GoalProgress />
+          <TopHabits />
+          <MissedHabits />
+          <Achievements />
+        </div>
       </div>
     </TimeFilterProvider>
   );

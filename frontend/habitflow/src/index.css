@@ -17,5 +17,12 @@ code {
 }
 
 .content {
-  padding-bottom: 70px;
+  padding-bottom: 67px;
+}
+
+@media (min-width: 768px) {
+  .content {
+    padding-top: 72px;
+    padding-bottom: 0;
+  }
 }

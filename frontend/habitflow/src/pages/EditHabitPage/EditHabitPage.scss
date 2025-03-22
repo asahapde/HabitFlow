@@ -1,12 +1,26 @@
-.edit-habit-container {
-  padding: 20px;
+.edit-habit-wrapper {
   background-color: #f4f4f9;
   min-height: 100vh;
+  padding: 20px;
+}
+
+.edit-habit-container {
   color: #333;
+
+  @media (min-width: 768px) {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0;
+  }
 
   h2 {
     font-size: 26px;
     margin-bottom: 24px;
+
+    @media (min-width: 768px) {
+      font-size: 30px;
+      text-align: center; // ✅ consistent with other pages
+    }
   }
 
   .habit-form {
@@ -18,10 +32,25 @@
     flex-direction: column;
     gap: 28px;
 
+    @media (min-width: 600px) {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 1024px) {
+      max-width: 700px;
+      padding: 40px;
+      gap: 32px;
+    }
+
     .form-group {
       display: flex;
       flex-direction: column;
       gap: 10px;
+
+      @media (min-width: 768px) {
+        gap: 14px;
+      }
 
       label {
         font-weight: 600;
@@ -29,6 +58,10 @@
         color: #444;
         display: block;
         margin-bottom: 4px;
+
+        @media (min-width: 768px) {
+          font-size: 16px;
+        }
       }
 
       input,
@@ -41,6 +74,11 @@
         &:focus {
           border-color: #6c63ff;
           outline: none;
+        }
+
+        @media (min-width: 768px) {
+          font-size: 16px;
+          padding: 14px 16px;
         }
       }
     }
@@ -62,6 +100,11 @@
         &.selected {
           border-color: #6c63ff;
           background: #f0efff;
+        }
+
+        @media (min-width: 768px) {
+          padding: 10px;
+          font-size: 28px;
         }
       }
     }
@@ -96,6 +139,11 @@
         &:hover {
           background-color: #e3e0ff;
         }
+
+        @media (min-width: 768px) {
+          font-size: 15px;
+          padding: 12px;
+        }
       }
     }
 
@@ -113,13 +161,11 @@
       &:hover {
         background-color: #5b53e6;
       }
-    }
-  }
 
-  @media (min-width: 600px) {
-    .habit-form {
-      max-width: 500px;
-      margin: 0 auto;
+      @media (min-width: 768px) {
+        padding: 16px;
+        font-size: 18px;
+      }
     }
   }
 }

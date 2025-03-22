@@ -16,7 +16,8 @@ $shadow-color: rgba(0, 0, 0, 0.1);
   padding: 10px 0;
   box-shadow: 0 -2px 5px $shadow-color;
   border-top: 1px solid #ddd;
-  
+  z-index: 100;
+
   .nav-item {
     text-decoration: none;
     color: $inactive-color;
@@ -33,11 +34,33 @@ $shadow-color: rgba(0, 0, 0, 0.1);
     &:hover {
       color: darken($active-color, 10%);
     }
+
+    &.active {
+      color: $active-color;
+      font-weight: bold;
+    }
   }
 
-  /* ✅ CSS automatically highlights the active tab */
-  .nav-item.active {
-    color: $active-color;
-    font-weight: bold;
+  @media (min-width: 768px) {
+    top: 0;
+    bottom: unset;
+    height: 72px;
+    padding: 0 40px;
+    justify-content: center;
+    gap: 48px;
+    box-shadow: 0 2px 5px $shadow-color;
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+
+    .nav-item {
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+
+      .icon {
+        font-size: 22px;
+      }
+    }
   }
 }

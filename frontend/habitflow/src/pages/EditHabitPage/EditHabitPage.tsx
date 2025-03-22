@@ -53,66 +53,68 @@ const EditHabitPage: FC = () => {
   }
 
   return (
-    <div className="edit-habit-container">
-      <h2>Edit Habit</h2>
-      <form className="habit-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Icon</label>
-          <div className="icon-picker">
-            {icons.map((i) => (
-              <button
-                type="button"
-                key={i}
-                className={i === icon ? "selected" : ""}
-                onClick={() => setIcon(i)}
-              >
-                {i}
-              </button>
-            ))}
+    <div className="edit-habit-wrapper">
+      <div className="edit-habit-container">
+        <h2>Edit Habit</h2>
+        <form className="habit-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
-        </div>
 
-        <div className="form-group">
-          <label>Repeat Days</label>
-          <div className="days-selector">
-            {weekdays.map((day) => (
-              <button
-                type="button"
-                key={day}
-                className={repeatDays.includes(day) ? "active" : ""}
-                onClick={() => toggleDay(day)}
-              >
-                {day}
-              </button>
-            ))}
+          <div className="form-group">
+            <label>Icon</label>
+            <div className="icon-picker">
+              {icons.map((i) => (
+                <button
+                  type="button"
+                  key={i}
+                  className={i === icon ? "selected" : ""}
+                  onClick={() => setIcon(i)}
+                >
+                  {i}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="form-group">
-          <label htmlFor="quantity">Quantity (optional)</label>
-          <input
-            id="quantity"
-            type="number"
-            value={quantity}
-            onChange={(e) => setQuantity(Number(e.target.value))}
-            min={1}
-          />
-        </div>
+          <div className="form-group">
+            <label>Repeat Days</label>
+            <div className="days-selector">
+              {weekdays.map((day) => (
+                <button
+                  type="button"
+                  key={day}
+                  className={repeatDays.includes(day) ? "active" : ""}
+                  onClick={() => toggleDay(day)}
+                >
+                  {day}
+                </button>
+              ))}
+            </div>
+          </div>
 
-        <button type="submit" className="submit-btn">
-          Save Changes
-        </button>
-      </form>
+          <div className="form-group">
+            <label htmlFor="quantity">Quantity (optional)</label>
+            <input
+              id="quantity"
+              type="number"
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              min={1}
+            />
+          </div>
+
+          <button type="submit" className="submit-btn">
+            Save Changes
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

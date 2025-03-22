@@ -41,68 +41,70 @@ const ProfilePage: FC = () => {
   ];
 
   return (
-    <div className="profile-container">
-      <h2>Profile</h2>
+    <div className="profile-wrapper">
+      <div className="profile-container">
+        <h2>Profile</h2>
 
-      <div className="profile-card">
-        <img
-          src={photoURL || thumbsOptions[0]}
-          alt="User Avatar"
-          className="avatar"
-        />
+        <div className="profile-card">
+          <img
+            src={photoURL || thumbsOptions[0]}
+            alt="User Avatar"
+            className="avatar"
+          />
 
-        {!isEditing ? (
-          <>
-            <h3>{displayName || "Anonymous"}</h3>
-            <p>{user?.email}</p>
-            <button className="edit-btn" onClick={() => setIsEditing(true)}>
-              Edit Profile
-            </button>
-          </>
-        ) : (
-          <div className="edit-form">
-            <label>
-              Name
-              <input
-                type="text"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-              />
-            </label>
+          {!isEditing ? (
+            <>
+              <h3>{displayName || "Anonymous"}</h3>
+              <p>{user?.email}</p>
+              <button className="edit-btn" onClick={() => setIsEditing(true)}>
+                Edit Profile
+              </button>
+            </>
+          ) : (
+            <div className="edit-form">
+              <label>
+                Name
+                <input
+                  type="text"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                />
+              </label>
 
-            <div className="avatar-style-picker">
-              <label>Select an Avatar</label>
-              <div className="style-options">
-                {thumbsOptions.map((url) => (
-                  <img
-                    key={url}
-                    src={url}
-                    className={photoURL === url ? "selected" : ""}
-                    onClick={() => setPhotoURL(url)}
-                    alt="avatar option"
-                  />
-                ))}
+              <div className="avatar-style-picker">
+                <label>Select an Avatar</label>
+                <div className="style-options">
+                  {thumbsOptions.map((url) => (
+                    <img
+                      key={url}
+                      src={url}
+                      className={photoURL === url ? "selected" : ""}
+                      onClick={() => setPhotoURL(url)}
+                      alt="avatar option"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="edit-actions">
+                <button className="save-btn" onClick={handleUpdate}>
+                  Save
+                </button>
+                <button
+                  className="cancel-btn"
+                  onClick={() => setIsEditing(false)}
+                >
+                  Cancel
+                </button>
               </div>
             </div>
+          )}
+        </div>
 
-            <div className="edit-actions">
-              <button className="save-btn" onClick={handleUpdate}>
-                Save
-              </button>
-              <button
-                className="cancel-btn"
-                onClick={() => setIsEditing(false)}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        )}
+        <button className="logout-btn" onClick={logout}>
+          Logout
+        </button>
       </div>
-
-      <button className="logout-btn" onClick={logout}>
-        Logout
-      </button>
     </div>
   );
 };
