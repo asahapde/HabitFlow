@@ -87,7 +87,7 @@ const HomePage: React.FC = () => {
                   </button>
                   <button
                     className="edit-btn"
-                    // onClick={() => navigate(`/edit-habit/${habit.id}`)}
+                    onClick={() => navigate(`/edit-habit/${habit.id}`)}
                   >
                     ✏️
                   </button>

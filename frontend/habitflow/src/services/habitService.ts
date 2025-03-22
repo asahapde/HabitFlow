@@ -119,3 +119,48 @@ export const toggleHabitCompletion = async (habitId: string) => {
     throw new Error("Habit not found");
   }
 };
+
+export const getHabitById = async (habitId: string): Promise<Habit | null> => {
+  try {
+    const docRef = doc(db, "habits", habitId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return {
+        id: docSnap.id,
+        ...docSnap.data(),
+      } as Habit;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching habit by ID:", error);
+    return null;
+  }
+};
+
+interface UpdateHabitPayload {
+  name: string;
+  icon: string;
+  repeatDays: string[];
+  quantity: number;
+}
+
+export const updateHabit = async (
+  habitId: string,
+  updates: UpdateHabitPayload
+) => {
+  try {
+    const docRef = doc(db, "habits", habitId);
+    await updateDoc(docRef, {
+      name: updates.name,
+      icon: updates.icon,
+      repeatDays: updates.repeatDays,
+      quantity: updates.quantity,
+    });
+    console.log("✅ Habit updated");
+  } catch (error) {
+    console.error("❌ Failed to update habit:", error);
+    throw error;
+  }
+};

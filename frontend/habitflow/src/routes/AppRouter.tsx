@@ -11,6 +11,7 @@ const Habits = lazy(() => import("../pages/HabitsPage/HabitsPage"));
 const Insights = lazy(() => import("../pages/InsightsPage/InsightsPage"));
 const Profile = lazy(() => import("../pages/ProfilePage/ProfilePage"));
 const NotFound = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
+const EditHabit = lazy(() => import("../pages/EditHabitPage/EditHabitPage"));
 
 const AppRouter: FC = () => {
   return (
@@ -28,6 +29,7 @@ const AppRouter: FC = () => {
                 <Route path="/habits" element={<Habits />} />
                 <Route path="/insights" element={<Insights />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/edit-habit/:id" element={<EditHabit />} />
               </Route>
 
               {/* 404 Page */}
