@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import {
   deleteHabit,
   getUserHabits,
-  toggleHabitCompletion, // ✅ New function to toggle completion
+  toggleHabitCompletion,
 } from "../../services/habitService";
 import { Habit } from "../../types/Habit";
 import "./HomePage.scss";
@@ -17,7 +17,7 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      getUserHabits(user.uid).then(setHabits); // ✅ Fetch habits from Firestore
+      getUserHabits(user.uid).then(setHabits);
     }
 
     const currentDay = new Date().toLocaleDateString("en-US", {
@@ -29,7 +29,6 @@ const HomePage: React.FC = () => {
   const handleToggleCompletion = async (habitId: string) => {
     const updatedCompletedDates = await toggleHabitCompletion(habitId);
 
-    // ✅ Update habits instantly in UI
     setHabits((prevHabits) =>
       prevHabits.map((habit) =>
         habit.id === habitId
@@ -44,7 +43,6 @@ const HomePage: React.FC = () => {
     setHabits(habits.filter((habit) => habit.id !== habitId));
   };
 
-  // 🔥 Filter tasks based on completion
   const todayHabits = habits.filter(
     (habit) =>
       habit.repeatDays.includes(today) && !habit.completedDates.includes(today)
@@ -61,7 +59,6 @@ const HomePage: React.FC = () => {
     <div className="home-container">
       <h2>Welcome, {user?.displayName || "User"}!</h2>
 
-      {/* 🔥 Active Tasks */}
       <div className="tasks-section">
         <h3>Today's Tasks</h3>
         {todayHabits.length === 0 ? (
