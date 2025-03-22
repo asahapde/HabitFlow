@@ -70,32 +70,6 @@ const ProfilePage: FC = () => {
               />
             </label>
 
-            {/* <label>
-              Photo URL
-              <input
-                type="text"
-                value={photoURL}
-                onChange={(e) => setPhotoURL(e.target.value)}
-              />
-            </label>
-
-            <label>
-              Upload Image
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (!file) return;
-                  const reader = new FileReader();
-                  reader.onloadend = () => {
-                    setPhotoURL(reader.result as string);
-                  };
-                  reader.readAsDataURL(file);
-                }}
-              />
-            </label> */}
-
             <div className="avatar-style-picker">
               <label>Select an Avatar</label>
               <div className="style-options">

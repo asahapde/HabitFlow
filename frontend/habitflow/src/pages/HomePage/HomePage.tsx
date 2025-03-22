@@ -15,6 +15,10 @@ const HomePage: React.FC = () => {
   const [habits, setHabits] = useState<Habit[]>([]);
   const [today, setToday] = useState("");
 
+  const avatarURL =
+    user?.photoURL ||
+    `https://api.dicebear.com/7.x/thumbs/svg?seed=${user?.uid || "default"}`;
+
   useEffect(() => {
     if (user) {
       getUserHabits(user.uid).then(setHabits);
@@ -57,7 +61,10 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="home-container">
-      <h2>Welcome, {user?.displayName || "User"}!</h2>
+      <div className="welcome-header">
+        <img src={avatarURL} alt="Avatar" className="user-avatar" />
+        <h2>Welcome, {user?.displayName || "User"}!</h2>
+      </div>
 
       <div className="tasks-section">
         <h3>Today's Tasks</h3>
@@ -101,7 +108,6 @@ const HomePage: React.FC = () => {
         )}
       </div>
 
-      {/* 🔥 Completed Tasks */}
       {completedTodayHabits.length > 0 && (
         <div className="completed-section">
           <h3>Completed Tasks</h3>
@@ -123,7 +129,6 @@ const HomePage: React.FC = () => {
         </div>
       )}
 
-      {/* 🔥 Upcoming Tasks */}
       <div className="upcoming-section">
         <h3>Upcoming Tasks</h3>
         {upcomingHabits.length === 0 ? (

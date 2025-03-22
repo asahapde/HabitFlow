@@ -14,12 +14,6 @@ import { db } from "./firebaseConfig";
 
 const daysOrder = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-/**
- * 🔥 Add a new habit to Firestore
- */
-/**
- * 🔥 Add a new habit to Firestore
- */
 export const addHabit = async (habit: {
   userId: string;
   name: string;
@@ -45,17 +39,12 @@ export const addHabit = async (habit: {
   try {
     const habitsRef = collection(db, "habits");
     const docRef = await addDoc(habitsRef, newHabit);
-    console.log("✅ Habit added with ID:", docRef.id);
     return docRef.id;
   } catch (error) {
-    console.error("❌ Error adding habit:", error);
     throw error;
   }
 };
 
-/**
- * ❌ Delete a habit from Firestore
- */
 export const deleteHabit = async (habitId: string) => {
   try {
     await deleteDoc(doc(db, "habits", habitId));
@@ -66,9 +55,6 @@ export const deleteHabit = async (habitId: string) => {
   }
 };
 
-/**
- * ✅ Fetch All User Habits (Includes Completion Data)
- */
 export const getUserHabits = async (userId: string): Promise<Habit[]> => {
   const habitsQuery = query(
     collection(db, "habits"),
@@ -77,7 +63,7 @@ export const getUserHabits = async (userId: string): Promise<Habit[]> => {
   const snapshot = await getDocs(habitsQuery);
 
   return snapshot.docs.map((doc) => {
-    const data = doc.data() as Omit<Habit, "id">; // ✅ Tell TS the rest matches Habit minus ID
+    const data = doc.data() as Omit<Habit, "id">;
     return {
       id: doc.id,
       ...data,
@@ -85,9 +71,6 @@ export const getUserHabits = async (userId: string): Promise<Habit[]> => {
   });
 };
 
-/**
- * ✅ Toggle Completion Status for a Habit
- */
 export const toggleHabitCompletion = async (habitId: string) => {
   const habitRef = doc(db, "habits", habitId);
   const habitSnap = await getDoc(habitRef);
@@ -96,25 +79,21 @@ export const toggleHabitCompletion = async (habitId: string) => {
     const habitData = habitSnap.data();
     const today = new Date().toLocaleDateString("en-US", { weekday: "short" });
 
-    // ✅ Ensure `completedDates` is an array
     let updatedCompletedDates = Array.isArray(habitData.completedDates)
       ? [...habitData.completedDates]
       : [];
 
     if (updatedCompletedDates.includes(today)) {
-      // ✅ Remove today from completed dates
       updatedCompletedDates = updatedCompletedDates.filter(
         (date) => date !== today
       );
     } else {
-      // ✅ Add today as completed
       updatedCompletedDates.push(today);
     }
 
-    // ✅ Update Firestore
     await updateDoc(habitRef, { completedDates: updatedCompletedDates });
 
-    return updatedCompletedDates; // ✅ Return updated array
+    return updatedCompletedDates;
   } else {
     throw new Error("Habit not found");
   }
@@ -158,9 +137,7 @@ export const updateHabit = async (
       repeatDays: updates.repeatDays,
       quantity: updates.quantity,
     });
-    console.log("✅ Habit updated");
   } catch (error) {
-    console.error("❌ Failed to update habit:", error);
     throw error;
   }
 };

@@ -15,11 +15,10 @@ const AuthPage: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/"); // Redirect if already logged in
+      navigate("/");
     }
   }, [user, navigate]);
 
-  // Function to map Firebase error codes to readable messages
   const getErrorMessage = (errorCode: string): string => {
     const errorMessages: { [key: string]: string } = {
       "auth/email-already-in-use":
@@ -78,7 +77,7 @@ const AuthPage: React.FC = () => {
     : "Don't have an account?";
   const toggleButtonText = isSignUp ? "Sign In" : "Sign Up";
 
-  if (loading) return <div className="loading-screen">Loading...</div>; // ✅ Show a loader instead of flashing the page
+  if (loading) return <div className="loading-screen">Loading...</div>;
 
   return (
     <div className="auth-container">
