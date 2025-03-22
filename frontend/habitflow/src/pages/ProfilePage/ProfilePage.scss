@@ -131,3 +131,37 @@
     }
   }
 }
+
+.avatar-style-picker {
+  label {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .style-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+
+    img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      &.selected {
+        border-color: #6c63ff;
+      }
+    }
+  }
+}
