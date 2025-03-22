@@ -16,24 +16,32 @@ const daysOrder = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 export const addHabit = async (habit: {
   userId: string;
+  username: string;
   name: string;
   icon: string;
   repeatDays: string[];
   quantity: number;
   completedDates: string[];
 }) => {
-  if (!habit.name.trim()) return Promise.reject("Habit name cannot be empty.");
+  if (!habit.name.trim()) {
+    return Promise.reject("Habit name cannot be empty.");
+  }
 
   const today = new Date().toLocaleDateString("en-US", { weekday: "short" });
 
-  // ✅ Ensure days are sorted in weekday order (or default to today)
   const sortedRepeatDays = (
     habit.repeatDays.length > 0 ? habit.repeatDays : [today]
   ).sort((a, b) => daysOrder.indexOf(a) - daysOrder.indexOf(b));
 
   const newHabit = {
-    ...habit,
+    userId: habit.userId,
+    username: habit.username,
+    name: habit.name.trim(),
+    icon: habit.icon,
     repeatDays: sortedRepeatDays,
+    quantity: habit.quantity,
+    completedDates: habit.completedDates,
+    createdAt: new Date().toISOString(),
   };
 
   try {

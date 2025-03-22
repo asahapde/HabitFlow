@@ -38,6 +38,7 @@ const HabitsPage: FC = () => {
       quantity,
       completedDates: [],
       userId: user.uid,
+      username: user.displayName || "Anonymous",
     });
 
     navigate("/");

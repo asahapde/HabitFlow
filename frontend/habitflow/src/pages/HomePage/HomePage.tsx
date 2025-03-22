@@ -1,3 +1,4 @@
+import { CheckCircle, Edit3, Trash2, Undo2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -85,21 +86,24 @@ const HomePage: React.FC = () => {
                 <div className="task-actions">
                   <button
                     className="toggle-btn"
+                    aria-label="Mark as complete"
                     onClick={() => handleToggleCompletion(habit.id)}
                   >
-                    ✅
+                    <CheckCircle size={20} />
                   </button>
                   <button
                     className="edit-btn"
+                    aria-label="Edit habit"
                     onClick={() => navigate(`/edit-habit/${habit.id}`)}
                   >
-                    ✏️
+                    <Edit3 size={20} />
                   </button>
                   <button
                     className="delete-btn"
+                    aria-label="Delete habit"
                     onClick={() => handleDelete(habit.id)}
                   >
-                    🗑
+                    <Trash2 size={20} />
                   </button>
                 </div>
               </li>
@@ -119,9 +123,10 @@ const HomePage: React.FC = () => {
                 </span>
                 <button
                   className="toggle-btn"
+                  aria-label="Undo completion"
                   onClick={() => handleToggleCompletion(habit.id)}
                 >
-                  🔁
+                  <Undo2 size={20} />
                 </button>
               </li>
             ))}
@@ -144,15 +149,17 @@ const HomePage: React.FC = () => {
                 <div className="task-actions">
                   <button
                     className="edit-btn"
+                    aria-label="Edit habit"
                     onClick={() => navigate(`/edit-habit/${habit.id}`)}
                   >
-                    ✏️
+                    <Edit3 size={20} />
                   </button>
                   <button
                     className="delete-btn"
+                    aria-label="Delete habit"
                     onClick={() => handleDelete(habit.id)}
                   >
-                    🗑
+                    <Trash2 size={20} />
                   </button>
                 </div>
               </li>
