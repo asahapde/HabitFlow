@@ -15,3 +15,7 @@ code {
 * {
   box-sizing: border-box;
 }
+
+.content {
+  padding-bottom: 70px;
+}
