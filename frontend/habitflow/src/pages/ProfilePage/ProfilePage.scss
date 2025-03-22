@@ -1,49 +1,133 @@
-$primary-color: #6c63ff;
-$hover-color: #5348c7;
-$error-color: #d32f2f;
-$button-radius: 8px;
-$transition-speed: 0.3s;
-
 .profile-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 100vh;
+  padding: 24px;
+  min-height: 100vh;
   background: #f4f4f9;
   color: #333;
 
   h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 28px;
+    margin-bottom: 24px;
+    font-weight: 700;
   }
 
-  p {
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
+  .profile-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    max-width: 450px;
+    margin: 0 auto 40px auto;
 
-  .logout-button {
-    background: $error-color;
-    color: white;
-    font-size: 16px;
-    padding: 12px 20px;
-    border: none;
-    border-radius: $button-radius;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color $transition-speed, transform $transition-speed;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-
-    &:hover {
-      background: darken($error-color, 10%);
-      transform: translateY(-2px);
-      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      margin-bottom: 16px;
+      object-fit: cover;
     }
 
-    &:active {
-      transform: translateY(1px);
+    h3 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 16px;
+    }
+
+    .edit-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #6c63ff;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+
+      &:hover {
+        background: #5a52e0;
+      }
+    }
+
+    .edit-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 10px;
+
+      label {
+        font-size: 15px;
+        text-align: left;
+        font-weight: 500;
+
+        input {
+          margin-top: 6px;
+          width: 100%;
+          padding: 10px;
+          border-radius: 10px;
+          border: 1px solid #ccc;
+          font-size: 15px;
+        }
+      }
+
+      .edit-actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 12px;
+
+        .save-btn,
+        .cancel-btn {
+          padding: 10px 16px;
+          border-radius: 8px;
+          border: none;
+          font-size: 15px;
+          cursor: pointer;
+          font-weight: 600;
+        }
+
+        .save-btn {
+          background: #6c63ff;
+          color: white;
+
+          &:hover {
+            background: #554fd1;
+          }
+        }
+
+        .cancel-btn {
+          background: #eaeaea;
+
+          &:hover {
+            background: #d2d2d2;
+          }
+        }
+      }
+    }
+  }
+
+  .logout-btn {
+    display: block;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    background: #ff6b6b;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background: #e65555;
     }
   }
 }
