@@ -18,7 +18,6 @@ const ProfilePage: FC = () => {
         photoURL,
       });
       setIsEditing(false);
-      window.location.reload();
     } catch (error) {
       console.error("Error updating profile:", error);
     }
