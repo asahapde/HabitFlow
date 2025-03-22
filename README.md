@@ -68,30 +68,12 @@ npm run start
 
 ---
 
-## 🌐 Live Demo
-
-> Coming soon... (or add your Vercel/Netlify link here)
-
----
-
-## 📸 Sneak Peek
-
-> Add a few screenshots or a GIF to show off the UI here!
-
----
-
-## 🤝 Contributing
-
-Pull requests are welcome. For major changes, open an issue first to discuss what you'd like to change.
-
----
-
 ## 📄 License
 
 [MIT](LICENSE)
 
 ---
 
-## 💜 Made with love by [Your Name]
+## 💜 Made with love by Abdullah
 
 > Powered by coffee, consistency, and a commitment to clean UX.
