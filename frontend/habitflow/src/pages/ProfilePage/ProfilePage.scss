@@ -133,34 +133,36 @@
 }
 
 .avatar-style-picker {
+  margin-top: 20px;
+
   label {
+    font-weight: 600;
     font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 8px;
     display: block;
+    margin-bottom: 10px;
   }
 
   .style-options {
     display: flex;
-    gap: 10px;
     flex-wrap: wrap;
+    gap: 12px;
     justify-content: center;
-    margin-top: 8px;
 
     img {
-      width: 48px;
-      height: 48px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
-      cursor: pointer;
       border: 2px solid transparent;
+      cursor: pointer;
       transition: transform 0.2s ease;
 
       &:hover {
-        transform: scale(1.05);
+        transform: scale(1.1);
       }
 
       &.selected {
         border-color: #6c63ff;
+        box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
       }
     }
   }

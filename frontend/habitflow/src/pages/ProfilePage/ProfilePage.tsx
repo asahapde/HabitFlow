@@ -4,16 +4,11 @@ import { useAuth } from "../../context/AuthContext";
 import { auth } from "../../services/firebaseConfig";
 import "./ProfilePage.scss";
 
-const dicebearStyles = ["thumbs", "bottts", "avataaars", "micah", "notionists"];
-
 const ProfilePage: FC = () => {
   const { user } = useAuth();
   const [displayName, setDisplayName] = useState(user?.displayName || "");
   const [photoURL, setPhotoURL] = useState(user?.photoURL || "");
-  const [selectedStyle, setSelectedStyle] = useState("thumbs");
   const [isEditing, setIsEditing] = useState(false);
-
-  const seed = user?.uid || "default";
 
   const handleUpdate = async () => {
     if (!auth.currentUser) return;
@@ -34,16 +29,24 @@ const ProfilePage: FC = () => {
     window.location.href = "/auth";
   };
 
+  const thumbsOptions = [
+    "https://api.dicebear.com/7.x/thumbs/svg?seed=flame",
+    "https://api.dicebear.com/7.x/thumbs/svg?seed=lavender",
+    "https://api.dicebear.com/7.x/thumbs/svg?seed=mango",
+    "https://api.dicebear.com/7.x/thumbs/svg?seed=bubblegum",
+    "https://api.dicebear.com/7.x/thumbs/svg?seed=emerald",
+    "https://api.dicebear.com/7.x/thumbs/svg?seed=tangerine",
+    "https://api.dicebear.com/7.x/thumbs/svg?seed=sky",
+    "https://api.dicebear.com/7.x/thumbs/svg?seed=cobalt",
+  ];
+
   return (
     <div className="profile-container">
       <h2>Profile</h2>
 
       <div className="profile-card">
         <img
-          src={
-            photoURL ||
-            `https://api.dicebear.com/7.x/${selectedStyle}/svg?seed=${seed}`
-          }
+          src={photoURL || thumbsOptions[0]}
           alt="User Avatar"
           className="avatar"
         />
@@ -67,7 +70,7 @@ const ProfilePage: FC = () => {
               />
             </label>
 
-            <label>
+            {/* <label>
               Photo URL
               <input
                 type="text"
@@ -91,23 +94,18 @@ const ProfilePage: FC = () => {
                   reader.readAsDataURL(file);
                 }}
               />
-            </label>
+            </label> */}
 
             <div className="avatar-style-picker">
-              <label>Choose Dicebear Style</label>
+              <label>Select an Avatar</label>
               <div className="style-options">
-                {dicebearStyles.map((style) => (
+                {thumbsOptions.map((url) => (
                   <img
-                    key={style}
-                    src={`https://api.dicebear.com/7.x/${style}/svg?seed=${seed}`}
-                    alt={style}
-                    className={selectedStyle === style ? "selected" : ""}
-                    onClick={() => {
-                      setSelectedStyle(style);
-                      setPhotoURL(
-                        `https://api.dicebear.com/7.x/${style}/svg?seed=${seed}`
-                      );
-                    }}
+                    key={url}
+                    src={url}
+                    className={photoURL === url ? "selected" : ""}
+                    onClick={() => setPhotoURL(url)}
+                    alt="avatar option"
                   />
                 ))}
               </div>
