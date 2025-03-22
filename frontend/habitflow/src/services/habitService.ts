@@ -17,31 +17,29 @@ const daysOrder = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 /**
  * 🔥 Add a new habit to Firestore
  */
-export const addHabit = async (
-  userId: string,
-  userName: string,
-  habitName: string,
-  selectedIcon: string,
-  repeatDays: string[],
-  quantity: number
-) => {
-  if (!habitName.trim()) return Promise.reject("Habit name cannot be empty.");
+/**
+ * 🔥 Add a new habit to Firestore
+ */
+export const addHabit = async (habit: {
+  userId: string;
+  name: string;
+  icon: string;
+  repeatDays: string[];
+  quantity: number;
+  completedDates: string[];
+}) => {
+  if (!habit.name.trim()) return Promise.reject("Habit name cannot be empty.");
 
   const today = new Date().toLocaleDateString("en-US", { weekday: "short" });
 
-  // ✅ Ensure days are sorted in order (Default to today if empty)
-  const sortedRepeatDays = (repeatDays.length > 0 ? repeatDays : [today]).sort(
-    (a, b) => daysOrder.indexOf(a) - daysOrder.indexOf(b)
-  );
+  // ✅ Ensure days are sorted in weekday order (or default to today)
+  const sortedRepeatDays = (
+    habit.repeatDays.length > 0 ? habit.repeatDays : [today]
+  ).sort((a, b) => daysOrder.indexOf(a) - daysOrder.indexOf(b));
 
   const newHabit = {
-    userId,
-    userName,
-    name: habitName,
-    icon: selectedIcon,
+    ...habit,
     repeatDays: sortedRepeatDays,
-    quantity,
-    completedDates: [],
   };
 
   try {
