@@ -6,6 +6,7 @@ import { AuthProvider } from "../context/AuthContext";
 import AuthPage from "../pages/AuthPage/AuthPage";
 
 // Lazy load pages
+const LandingPage = lazy(() => import("../pages/LandingPage/LandingPage"));
 const Home = lazy(() => import("../pages/HomePage/HomePage"));
 const Habits = lazy(() => import("../pages/HabitsPage/HabitsPage"));
 const Insights = lazy(() => import("../pages/InsightsPage/InsightsPage"));
@@ -21,10 +22,14 @@ const AppRouter: FC = () => {
           fallback={<div className="suspense-fallback">Loading...</div>}
         >
           <Routes>
-            {/* Public Route */}
+            <Route path="/" element={<LandingPage />} />
+
+            {/* Auth */}
             <Route path="/auth" element={<AuthPage />} />
 
+            {/* Protected App Layout */}
             <Route
+              path="/app"
               element={
                 <>
                   <div className="content">
@@ -35,15 +40,15 @@ const AppRouter: FC = () => {
               }
             >
               <Route element={<ProtectedRoute />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/habits" element={<Habits />} />
-                <Route path="/insights" element={<Insights />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/edit-habit/:id" element={<EditHabit />} />
+                <Route index element={<Home />} />
+                <Route path="habits" element={<Habits />} />
+                <Route path="insights" element={<Insights />} />
+                <Route path="profile" element={<Profile />} />
+                <Route path="edit-habit/:id" element={<EditHabit />} />
               </Route>
             </Route>
 
-            {/* 404 Route */}
+            {/* 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

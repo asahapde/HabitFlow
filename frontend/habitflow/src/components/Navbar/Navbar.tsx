@@ -10,19 +10,19 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="navbar">
-      <NavLink to="/" className="nav-item">
+      <NavLink to="/app" className="nav-item">
         <span className="icon">🏠</span>
         <span className="label">Home</span>
       </NavLink>
-      <NavLink to="/habits" className="nav-item">
+      <NavLink to="/app/habits" className="nav-item">
         <span className="icon">📋</span>
         <span className="label">Habits</span>
       </NavLink>
-      <NavLink to="/insights" className="nav-item">
+      <NavLink to="/app/insights" className="nav-item">
         <span className="icon">📊</span>
         <span className="label">Insights</span>
       </NavLink>
-      <NavLink to="/profile" className="nav-item">
+      <NavLink to="/app/profile" className="nav-item">
         <span className="icon">👤</span>
         <span className="label">Profile</span>
       </NavLink>

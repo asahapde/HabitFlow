@@ -41,7 +41,7 @@ const HabitsPage: FC = () => {
       username: user.displayName || "Anonymous",
     });
 
-    navigate("/");
+    navigate("/app");
   };
 
   return (

@@ -72,7 +72,10 @@ const HomePage: React.FC = () => {
         {todayHabits.length === 0 ? (
           <p className="no-tasks">
             No tasks for today.
-            <button className="create-btn" onClick={() => navigate("/habits")}>
+            <button
+              className="create-btn"
+              onClick={() => navigate("/app/habits")}
+            >
               Create one
             </button>
           </p>

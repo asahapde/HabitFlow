@@ -45,7 +45,7 @@ const EditHabitPage: FC = () => {
       repeatDays,
       quantity,
     });
-    navigate("/");
+    navigate("/app");
   };
 
   if (loading) {
