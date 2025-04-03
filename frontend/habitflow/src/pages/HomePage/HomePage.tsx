@@ -97,7 +97,7 @@ const HomePage: React.FC = () => {
                   <button
                     className="edit-btn"
                     aria-label="Edit habit"
-                    onClick={() => navigate(`/edit-habit/${habit.id}`)}
+                    onClick={() => navigate(`/app/edit-habit/${habit.id}`)}
                   >
                     <Edit3 size={20} />
                   </button>
